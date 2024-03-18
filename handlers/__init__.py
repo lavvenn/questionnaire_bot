@@ -1,1 +1,1 @@
-from . import commands, messages, questionaire, debug
+from . import admin, commands, messages, questionaire, view_profilles

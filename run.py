@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 
 from config import TOKEN
 
-from handlers import commands, messages, questionaire, debug
+from handlers import admin, commands, messages, questionaire, view_profilles
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
@@ -12,9 +12,10 @@ dp = Dispatcher()
 async def main():
     dp.include_routers(
         messages.router,
-        commands.router,
         questionaire.router,
-        debug.router,
+        admin.router,
+        view_profilles.router,
+        commands.router,
     )
     # await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

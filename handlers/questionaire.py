@@ -10,7 +10,7 @@ from data.db import add_user_questionaire
 
 router = Router()
 
-@router.message(F.text == '/profile')
+@router.message(F.text == '📝создать/редактировать анкету')
 async def fill_profile(message : Message, state: FSMContext):
     await state.set_state(Form.name)
     await message.answer(text = 'введи имя', reply_markup= profile(message.from_user.first_name))
@@ -27,23 +27,19 @@ async def form_name(message: Message, state: FSMContext):
 async def from_age(message: Message, state: FSMContext):
     if message.text.isdigit():
         await state.update_data(age = message.text)
-        await state.set_state(Form.sex)
+        await state.set_state(Form.gender)
         await message.answer(text = 'выберите ваш пол', reply_markup= profile(["M", 'F']))
     else:
         await message.answer(text='ЦИФРАМИ ПИШИ')
 
 
-# TODO: доделать проверку пола
+# TODO: доделать проверку пола 
 
-# @router.message(Form.sex, F.text.casefold().in_(["M", 'F']))
-# async def form_sex(message: Message, state: FSMContext):
-#     await state.update_data(sex = message.text)
-#     await state.set_state(Form.about)
-#     await message.answer(text = 'о себе')
 
-@router.message(Form.sex)
-async def incorrect_form_sex(message: Message, state: FSMContext):
-    await state.update_data(sex = message.text)
+
+@router.message(Form.gender)
+async def incorrect_form_gender(message: Message, state: FSMContext):
+    await state.update_data(gender = message.text)
     await state.set_state(Form.about)
     await message.answer(text = 'о себе')
 
