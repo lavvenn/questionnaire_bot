@@ -27,10 +27,15 @@ async def view_profiles_text(message: Message, state: FSMContext):
 async def view_profiles_callback(query: CallbackQuery, state: FSMContext):
     if query.data == "view_next_profile":
         try:
+
+            fom_user_id = query.message.from_user.id
+
             state_data = await state.get_data()
 
             unviewed_list = state_data['unviewed']
-            
+           
+            unviewed_list.remove(from_user_id)
+
             user_id = random.choice(unviewed_list)
 
             unviewed_list.remove(user_id)
