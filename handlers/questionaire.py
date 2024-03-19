@@ -6,6 +6,8 @@ from utils.states import Form
 
 from keyboards.builder import profile
 
+from keyboards import reply
+
 from data.db import add_user_questionaire
 
 router = Router()
@@ -64,7 +66,7 @@ async def from_photo(message: Message, state: FSMContext):
         formated_text.append(f"{key}: {value}")
         for key, value in data.items() if key != "photo"
     ]
-    await message.answer_photo(photo_file_id, "\n".join(formated_text))
+    await message.answer_photo(photo_file_id, "\n".join(formated_text), reply_markup=reply.start_kb)
    
 
     print(data)

@@ -12,7 +12,7 @@ from data.db import get_user_data, get_users_id_list
 
 router = Router()
 
-@router.message(F.text == "🔍смотреть анкеты(норм)")
+@router.message(F.text == "🔍смотреть анкеты")
 async def view_profiles(message : Message, state: FSMContext):
     await state.set_state(View_profiles.view)
     await state.update_data(unviewed = get_users_id_list())

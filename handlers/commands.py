@@ -60,10 +60,3 @@ async def all_message(message: Message):
     await message.answer(text = EROR_TEXT) 
 
 #<----callback handlers---->
-@router.callback_query(F.data == "rofl")
-async def find_profiles(query: CallbackQuery):
-    user_data = get_user_data(random.choice(get_users_id_list()))
-    formated_text = []
-    [formated_text.append(f"{key}: {value}") for key, value in user_data.items() if key != "photo"]
-    await query.message.answer_photo(photo= user_data.pop("photo"), caption= "\n".join(formated_text))
-    await query.answer(text='ну сделал')
