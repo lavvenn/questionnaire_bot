@@ -64,7 +64,7 @@ async def from_photo(message: Message, state: FSMContext):
     formated_text = []
     [
         formated_text.append(f"{key}: {value}")
-        for key, value in data.items() if key != "photo"
+        for key, value in data.items() if key not in ["photo", "telegram_name"] 
     ]
     await message.answer_photo(photo_file_id, "\n".join(formated_text), reply_markup=reply.start_kb)
    

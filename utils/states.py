@@ -7,6 +7,9 @@ from aiogram.fsm.state import StatesGroup, State
 class View_profiles(StatesGroup):
     view = State()
 
+class Admin(StatesGroup):
+    get_photo = State()
+
 
 class Form(StatesGroup):
     name = State()

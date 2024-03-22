@@ -25,11 +25,13 @@ def admin_panel():
 
     return builder.as_markup()
 
-def next_profile():
+
+def metch_unmetch_kd(user_id):
     builder = InlineKeyboardBuilder()
 
-    builder.button(text = "⏭next", callback_data= 'view_next_profile')
-    builder.button(text = "🛑stop", callback_data= 'stop_view_profile')
+    buttons = ["👍","👎"]
+
+    [builder.button(text=button, callback_data=f"{button}{user_id}") for button in buttons]
 
     return builder.as_markup()
 

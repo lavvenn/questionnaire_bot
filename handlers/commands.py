@@ -1,6 +1,6 @@
 import random
 
-from aiogram import Router, F 
+from aiogram import Router, F , Bot
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command, CommandStart
@@ -37,13 +37,10 @@ async def my_profile_command(message: Message):
     [formated_text.append(f"{key}: {value}") for key, value in user_data.items() if key != "photo"]
     await message.answer_photo(photo= user_data.pop("photo"), caption= "\n".join(formated_text))
 
-@router.message(F.text == "🔍смотреть анкет")
-async def view_profiles(message : Message):
-    await message.answer(text = "ты сейчас серьёзно думал что я за 2 дня сделаю алгоритм поиска анкет??", reply_markup= inline.prikol)
 
-@router.message(Command("norm"))
+@router.message(F.text == "❓ помощь")
 async def norm_kb(message: Message):
-    await message.answer(text= "секретная клава????", reply_markup=reply.rofl_kb)
+    await message.answer(text= "чел, ну тут же всё очевидно. если тебе с ЭТИМ нужно помощь то советую тебе просто больше не заходить в интернет")
 
 
 @router.message(Command("admin"))
@@ -60,3 +57,9 @@ async def all_message(message: Message):
     await message.answer(text = EROR_TEXT) 
 
 #<----callback handlers---->
+
+# TODO доделать штуки
+
+# @router.callback_query(F.data == "👍")
+# async def send_matched_profile(query: CallbackQuery, bot: Bot):
+#     await bot.get_chat_member()

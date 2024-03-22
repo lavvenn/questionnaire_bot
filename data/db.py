@@ -19,19 +19,20 @@ def add_user_questionaire(user_id: int,user_data: dict):
     cur.execute("""
     REPLACE INTO users(id, name, age, gender, abowt, photo) VALUES (?, ?, ?, ?, ?, ?)
     """,
-    (user_id, user_data["name"], user_data["age"], user_data["gender"], user_data["about"], user_data["photo"],))
+    (user_id, user_data["name"], user_data["age"], user_data["gender"], user_data["about"], user_data["photo"]))
 
     db.commit()
     
-    return print('данные добавлены в базу')
+    return None
 
 
-def get_user_data(user_id: int,):
+def get_user_data(user_id: int,) -> dict:
     cur.execute("""SELECT * FROM users WHERE id = ?""", (user_id,))
     user_data = cur.fetchall()[0]
-    print(user_data)
-    result = {"имя": user_data[1], "возраст": user_data[2], "пол": user_data[3], "о себе": user_data[4], "photo": user_data[5]}
-    return  result
+    return  {"имя": user_data[1], "возраст": user_data[2], "пол": user_data[3], "о себе": user_data[4], "photo": user_data[5]}
+
+def get_user_username(user_id: int):
+    cur.execute("SELECT telegram_name FROM users WHERE id = ?", (user_id))
 
 
 def get_all_users():
@@ -42,10 +43,26 @@ def get_all_users():
 
 print(get_all_users())
 
-def get_users_id_list():
+def get_users_id_list(without: int = 0):
     cur.execute("SELECT id FROM users")
     users_id = cur.fetchall()
     users_id = [users_id[i][0] for i in range(0,len(users_id)) ]
-    return users_id
+    if without == 0:
+        return users_id
+    else:
+        users_id.remove(without)
+        return users_id
+
+print(f'в боте зарегистрированно : {len(get_users_id_list())} анкет')
 
 print(str(get_users_id_list()) + "<------------------------------------")
+
+
+def database_recovery(list):
+    for i , j in list, range(0, len(i)): 
+        cur.execute("""REPLACE INTO users(id, name, age, gender, abowt, photo) VALUES (?, ?, ?, ?, ?, ?)
+        """,(i[j], i[j], i[j], i[j], i[j], i[j]))
+
+    db.commit()
+    
+    return "урааааааааа"
