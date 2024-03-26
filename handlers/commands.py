@@ -58,8 +58,6 @@ async def all_message(message: Message):
 
 #<----callback handlers---->
 
-# TODO доделать штуки
-
-# @router.callback_query(F.data == "👍")
-# async def send_matched_profile(query: CallbackQuery, bot: Bot):
-#     await bot.get_chat_member()
+@router.callback_query()
+async def send_matched_profile(query: CallbackQuery,):
+    await query.answer()

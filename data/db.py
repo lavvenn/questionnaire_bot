@@ -59,10 +59,10 @@ print(str(get_users_id_list()) + "<------------------------------------")
 
 
 def database_recovery(list):
-    for i , j in list, range(0, len(i)): 
+    for i in list: 
         cur.execute("""REPLACE INTO users(id, name, age, gender, abowt, photo) VALUES (?, ?, ?, ?, ?, ?)
-        """,(i[j], i[j], i[j], i[j], i[j], i[j]))
-
+        """,(i[0], i[1], i[2], i[3], i[4], i[5]))
     db.commit()
     
     return "урааааааааа"
+

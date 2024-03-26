@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 
 from config import TOKEN
 
-from handlers import admin, commands, messages, questionaire, view_profilles
+from handlers import admin, commands, messages, questionaire, view_profilles, metch_callbacks
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
@@ -12,6 +12,7 @@ dp = Dispatcher()
 async def main():
     dp.include_routers(
         messages.router,
+        metch_callbacks.router,
         questionaire.router,
         admin.router,
         view_profilles.router,

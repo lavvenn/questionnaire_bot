@@ -7,6 +7,7 @@ from aiogram.fsm.context import FSMContext
 from utils.states import View_profiles
 
 from keyboards.reply import view_profiles_kb, start_kb
+from keyboards.builder import metch_unmetch_kd
 
 from data.db import get_user_data, get_users_id_list
 
@@ -53,7 +54,7 @@ async def view_profiles_text(message: Message, state: FSMContext, bot: Bot):
 
         from_user_data = get_user_data(message.from_user.id)
 
-        await bot.send_photo(chat_id = state_data["selected_user_id"], photo=from_user_data["photo"], caption= print_profile(from_user_data))
+        await bot.send_photo(chat_id = state_data["selected_user_id"], photo=from_user_data["photo"], caption= print_profile(from_user_data), reply_markup=metch_unmetch_kd(message.from_user.id))
         await bot.send_message(chat_id = state_data["selected_user_id"], text= "⬆кому то понравилась ваша анкета⬆")
 
         try:
