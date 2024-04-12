@@ -9,7 +9,14 @@ from handlers import admin, commands, messages, questionaire, view_profilles, me
 bot = Bot(TOKEN)
 dp = Dispatcher()
 
+
+
 async def main():
+    """
+    Main function that includes all routers and starts polling.
+    """
+
+    # Include all routers into dispatcher
     dp.include_routers(
         messages.router,
         metch_callbacks.router,
@@ -18,7 +25,8 @@ async def main():
         view_profilles.router,
         commands.router,
     )
-    # await bot.delete_webhook(drop_pending_updates=True)
+
+    # Start polling with bot to handle updates
     await dp.start_polling(bot)
 
 

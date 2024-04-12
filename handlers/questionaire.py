@@ -35,15 +35,19 @@ async def from_age(message: Message, state: FSMContext):
         await message.answer(text='ЦИФРАМИ ПИШИ')
 
 
-# TODO: доделать проверку пола 
-
-
 
 @router.message(Form.gender)
-async def incorrect_form_gender(message: Message, state: FSMContext):
-    await state.update_data(gender = message.text)
-    await state.set_state(Form.about)
-    await message.answer(text = 'о себе')
+async def form_gender(message: Message, state: FSMContext):
+    allowed_genders = {"M", "F"}
+    gender = message.text.upper()
+    if gender in allowed_genders:
+        await state.update_data(gender = gender)
+        await state.set_state(Form.about)
+        await message.answer(text = 'о себе')
+    else:
+        await message.answer(
+            text='Выберите пол из списка: "M" - мужчина, "F" - женщина'
+        )
 
 
 @router.message(Form.about)

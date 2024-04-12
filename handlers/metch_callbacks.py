@@ -16,11 +16,28 @@ def print_profile(user_data : dict) -> str:
 
 @router.callback_query(F.data.startswith("👍"))
 async def metch(query: CallbackQuery, bot: Bot):
-    from_user_data = get_user_data(query.from_user.id)
-    liked_user_member_data = await bot.get_chat_member(chat_id=query.data[1:], user_id=query.data[1:])
+    from_user = await get_user_data(query.from_user.id)
+    to_user = await get_user_data(query.data[1:])
 
-    await bot.send_photo(chat_id= query.data[1:], photo= from_user_data["photo"], caption= f"{print_profile(from_user_data)} \n \n ник --> @{query.from_user.username}", reply_markup=inline.metch_kb)
-    await query.message.edit_caption(caption=f"{print_profile(get_user_data(query.data[1:]))} \n \n ник --> @{liked_user_member_data.user.username}", reply_markup=inline.metch_kb)
+    await bot.send_photo(
+        chat_id=query.data[1:],
+        photo=from_user["photo"],
+        caption=f"{format_user_data(from_user)} \n Username: @{query.from_user.username}",
+        reply_markup=inline.metch_kb,
+    )
+
+    await query.message.edit_caption(
+        caption=f"{format_user_data(to_user)} \n Username: @{to_user['telegram_name']}",
+        reply_markup=inline.metch_kb,
+    )
+
+
+def format_user_data(user_data: dict) -> str:
+    fields_to_exclude = ["photo", "telegram_name"]
+    formatted_data = "\n".join(
+        f"{key}: {value}" for key, value in user_data.items() if key not in fields_to_exclude
+    )
+    return formatted_data
 
 
 @router.callback_query(F.data.startswith("👎"))

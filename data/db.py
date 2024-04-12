@@ -1,7 +1,9 @@
 import sqlite3
 
-db = sqlite3.connect('users_questionaire.db')
+db = sqlite3.connect('users_questionaire.db', check_same_thread=False)
 cur = db.cursor()
+
+print(f"{__name__} \n" * 100)
 
 cur.execute("""
 CREATE TABLE IF NOT EXISTS users(
