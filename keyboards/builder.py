@@ -19,7 +19,7 @@ def profile(text: str | list):
 def admin_panel():
     builder = InlineKeyboardBuilder()
     
-    admin_comand_list = ['all_users', 'print_photo']
+    admin_comand_list = ['print_photo', 'print_data_baze']
 
     [builder.button(text=command, callback_data=command) for command in admin_comand_list]
 

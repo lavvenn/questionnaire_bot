@@ -43,15 +43,6 @@ async def norm_kb(message: Message):
     await message.answer(text= "чел, ну тут же всё очевидно. если тебе с ЭТИМ нужно помощь то советую тебе просто больше не заходить в интернет")
 
 
-@router.message(Command("admin"))
-async def debug_command(message: Message):
-    if message.from_user.id in ADMIN_ID_LIST:
-        await message.answer(text="выберите нужную функцию", reply_markup=builder.admin_panel())
-        await message.delete()
-    else:
-        await message.answer(text = EROR_TEXT)
-
-
 @router.message()
 async def all_message(message: Message):
     await message.answer(text = EROR_TEXT) 

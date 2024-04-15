@@ -66,3 +66,10 @@ def database_recovery(list):
     
     return "урааааааааа"
 
+
+
+if __name__ == "__main__":
+
+    data_baze = []
+
+    database_recovery(data_baze)

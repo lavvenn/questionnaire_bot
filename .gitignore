@@ -167,3 +167,6 @@ handlers/__pycache__/commands.cpython-311.pyc
 handlers/__pycache__/debug.cpython-311.pyc
 handlers/__pycache__/commands.cpython-311.pyc
 handlers/__pycache__/questionaire.cpython-311.pyc
+
+# data_baze
+users_questionaire.db

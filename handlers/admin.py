@@ -5,25 +5,29 @@ from aiogram.fsm.context import FSMContext
 
 from utils.states import Admin
 
-from keyboards import reply
+from keyboards import reply, builder
 
 from data.db import get_all_users
+
+from config import ADMIN_ID_LIST, EROR_TEXT
 
 
 router = Router()
 
 #<----message handlers---->
-@router.message(Command('print_photo'))
-async def print_photo_command(message: Message):
-    await message.answer_photo(photo="AgACAgIAAxkBAAIFw2X27YgwVUTnnE9YfrCpb7ZSY85CAAJ22DEbX2i5SyO9FZJFNkqxAQADAgADeAADNAQ")
-
-
+@router.message(Command("admin"))
+async def debug_command(message: Message):
+    if message.from_user.id in ADMIN_ID_LIST:
+        await message.answer(text="выберите нужную функцию", reply_markup=builder.admin_panel())
+        await message.delete()
+    else:
+        await message.answer(text = EROR_TEXT)
 
 #<----callback handlers---->
-@router.callback_query(F.data == 'all_users')
-async def print_all_users(query: CallbackQuery):
+@router.callback_query(F.data == 'print_data_baze')
+async def print_data_baze(query: CallbackQuery):
     await query.message.answer(str(get_all_users()))
-    await query.answer(text='all users printed👍🏿')
+    await query.answer(text='data_baze printed👍🏿')
     await query.message.delete()
     
 @router.callback_query(F.data == 'print_photo')
