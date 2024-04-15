@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS users(
 """)
 db.commit()
 
+
 def add_user_questionaire(user_id: int,user_data: dict):
     cur.execute("""
     REPLACE INTO users(id, name, age, gender, abowt, photo) VALUES (?, ?, ?, ?, ?, ?)
@@ -30,6 +31,7 @@ def get_user_data(user_id: int,) -> dict:
     cur.execute("""SELECT * FROM users WHERE id = ?""", (user_id,))
     user_data = cur.fetchall()[0]
     return  {"имя": user_data[1], "возраст": user_data[2], "пол": user_data[3], "о себе": user_data[4], "photo": user_data[5]}
+
 
 def get_user_username(user_id: int):
     cur.execute("SELECT telegram_name FROM users WHERE id = ?", (user_id))
@@ -58,7 +60,7 @@ print(f'в боте зарегистрированно : {len(get_users_id_list(
 print(str(get_users_id_list()) + "<------------------------------------")
 
 
-def database_recovery(list):
+def database_recovery(data_baze: list[tuple]):
     for i in list: 
         cur.execute("""REPLACE INTO users(id, name, age, gender, abowt, photo) VALUES (?, ?, ?, ?, ?, ?)
         """,(i[0], i[1], i[2], i[3], i[4], i[5]))
@@ -72,4 +74,4 @@ if __name__ == "__main__":
 
     data_baze = []
 
-    database_recovery(data_baze)
+    database_recovery(data_baze = data_baze)
