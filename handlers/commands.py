@@ -40,7 +40,7 @@ async def my_profile_command(message: Message):
 
 @router.message(F.text == "❓ помощь")
 async def norm_kb(message: Message):
-    await message.answer(text= "чел, ну тут же всё очевидно. если тебе с ЭТИМ нужно помощь то советую тебе просто больше не заходить в интернет")
+    await message.answer(text= EROR_TEXT)
 
 
 @router.message()
