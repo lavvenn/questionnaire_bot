@@ -1,1 +1,1 @@
-from . import admin, commands, messages, questionaire, view_profilles, metch_callbacks
+from . import admin, commands, questionaire, view_profilles, metch_callbacks
